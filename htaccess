@@ -1,0 +1,15 @@
+# Single-page app fallback for React Router on shared hosting
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# Serve existing files and directories directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect all other requests to index.html
+RewriteRule ^ index.html [L]
+
+# Fallback 404 to index.html for routes not handled by the server
+ErrorDocument 404 /index.html
