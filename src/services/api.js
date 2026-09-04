@@ -1,9 +1,10 @@
 import { getStoredToken } from "./auth";
+import { firebaseAuth } from "../firebase";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 async function request(endpoint, options = {}) {
-  const token = getStoredToken();
+  const token = firebaseAuth.currentUser ? await firebaseAuth.currentUser.getIdToken() : getStoredToken();
   const headers = {
     "Content-Type": "application/json",
     ...(options.headers || {}),
@@ -11,10 +12,15 @@ async function request(endpoint, options = {}) {
 
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const response = await fetch(`${API_URL}${endpoint}`, {
-    ...options,
-    headers,
-  });
+  let response;
+  try {
+    response = await fetch(`${API_URL}${endpoint}`, {
+      ...options,
+      headers,
+    });
+  } catch {
+    throw new Error("The API server is unavailable. Start the backend with `npm run dev:server` and confirm Firestore is enabled.");
+  }
 
   let data = {};
   try {
@@ -37,6 +43,9 @@ export const register = (payload) =>
 
 export const login = (payload) =>
   request("/auth/login", { method: "POST", body: JSON.stringify(payload) });
+
+export const createProfile = (payload) =>
+  request("/auth/profile", { method: "POST", body: JSON.stringify(payload) });
 
 export const getMe = () => request("/auth/me");
 export const updateProfile = (payload) =>

@@ -3,5 +3,6 @@ dist/
 .env
 .env.example
 server/.env
+server/firebase-service-account.json
 npm-debug.log*
 .DS_Store

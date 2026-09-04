@@ -8,6 +8,7 @@ import { PriceFeedProvider } from "./context/PriceFeedContext";
 import { PortfolioProvider } from "./context/PortfolioContext";
 import { AlertProvider } from "./context/AlertContext";
 import { AutoSellProvider } from "./context/AutoSellContext";
+import "./firebase";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -51,8 +51,8 @@
 ## Stage 8 — MERN Backend
 - Node.js
 - Express
-- MongoDB
-- Mongoose
+- Firebase Firestore
+- Firebase Admin SDK
 - REST API
 - Portfolio synchronization
 - Trade persistence
@@ -71,6 +71,6 @@
 
 ## Final flow
 
-Register/Login -> JWT -> Protected React App -> Live Prices -> Buy/Sell -> Reducer -> Local Cache + API -> MongoDB -> Leaderboard
+Register/Login -> JWT -> Protected React App -> Live Prices -> Buy/Sell -> Reducer -> Local Cache + API -> Firebase Firestore -> Leaderboard
 
 Alerts and Auto-Sell watch the same live price feed and can trigger portfolio actions.
